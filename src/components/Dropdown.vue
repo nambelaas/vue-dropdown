@@ -1,15 +1,10 @@
 <template>
   <div class="dropdown">
-    <slot name="trigger"></slot>
+    <slot name="trigger" :toggleClass="toggleClass" :toggle="toggle"></slot>
     <!-- Dropdown menu -->
-    <div
-      id="dropdown"
-      class="z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1"
-    >
+    <div id="dropdown" :class="toggleClass">
       <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
-        
-
-        <slot name="menu"></slot>
+        <slot name="menu" :toggle="toggle"></slot>
       </ul>
     </div>
   </div>
@@ -18,5 +13,20 @@
 <script lang="ts">
 export default {
   name: 'Dropdown',
+  computed: {
+    toggleClass() {
+      return this.isOpen
+        ? 'z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
+        : 'hidden z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
+    },
+  },
+  data: () => ({
+    isOpen: false,
+  }),
+  methods: {
+    toggle() {
+      this.isOpen = !this.isOpen
+    },
+  },
 }
 </script>
