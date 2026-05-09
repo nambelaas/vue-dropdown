@@ -2,7 +2,7 @@
   <div class="dropdown">
     <slot name="trigger" :toggleClass="toggleClass" :iconClass="iconClass" :toggle="toggle"></slot>
     <!-- Dropdown menu -->
-    <div id="dropdown" :class="toggleClass">
+    <div id="dropdown" :class="toggleClass" v-on-click-outside="dropdownHandler">
       <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
         <slot name="menu" :toggle="toggle"></slot>
       </ul>
@@ -11,8 +11,12 @@
 </template>
 
 <script lang="ts">
+import { vOnClickOutside } from '@vueuse/components'
 export default {
   name: 'Dropdown',
+  directives: {
+    onClickOutside: vOnClickOutside,
+  },
   computed: {
     toggleClass() {
       return this.isOpen
@@ -20,8 +24,8 @@ export default {
         : 'hidden z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
     },
     iconClass() {
-        return this.isOpen ? 'w-4 h-4 ms-1.5 -me-0.5 rotate-180' : 'w-4 h-4 ms-1.5 -me-0.5'
-    }
+      return this.isOpen ? 'w-4 h-4 ms-1.5 -me-0.5 rotate-180' : 'w-4 h-4 ms-1.5 -me-0.5'
+    },
   },
   data: () => ({
     isOpen: false,
@@ -29,6 +33,9 @@ export default {
   methods: {
     toggle() {
       this.isOpen = !this.isOpen
+    },
+    dropdownHandler() {
+      this.isOpen = false
     },
   },
 }
