@@ -1,27 +1,29 @@
 <script lang="ts">
 import Dropdown from './components/Dropdown.vue'
+import DropdownItem from './components/DropdownItem.vue'
+import DropdownTrigger from './components/DropdownTrigger.vue'
 export default {
   name: 'App',
   components: {
     Dropdown,
+    DropdownItem,
+    DropdownTrigger,
   },
 }
 </script>
 
 <template>
   <Dropdown>
-    <template #trigger="{ toggleClass, toggle }">
-      <button
-        id="dropdownDefaultButton"
-        data-dropdown-toggle="dropdown"
-        class="bg-blue-500 rounded-lg cursor-pointer outline inline-flex items-center justify-center text-white box-border border border-transparent hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
-        :class="toggleClass"
+    <template #trigger="{ toggleClass, iconClass, toggle }">
+      <DropdownTrigger
         type="button"
+        data-dropdown-toggle="dropdown"
+        :class="toggleClass"
         @click="toggle"
       >
         Dropdown button
         <svg
-          class="w-4 h-4 ms-1.5 -me-0.5"
+          :class="iconClass"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -37,41 +39,37 @@ export default {
             d="m19 9-7 7-7-7"
           />
         </svg>
-      </button>
+      </DropdownTrigger>
     </template>
     <template #menu="{ toggle }">
-      <li>
-        <a
-          href="#"
-          @click.prevent="toggle"
-          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-          >Dashboard</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          @click.prevent="toggle"
-          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-          >Settings</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          @click.prevent="toggle"
-          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-          >Earnings</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          @click.prevent="toggle"
-          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-          >Sign out</a
-        >
-      </li>
+      <DropdownItem
+        href="#"
+        @click.prevent="toggle"
+        class="inline-flex items-center w-full p-2 hover:bg-gray-100 hover:text-heading rounded"
+      >
+        Dashboard
+      </DropdownItem>
+      <DropdownItem
+        href="#"
+        @click.prevent="toggle"
+        class="inline-flex items-center w-full p-2 hover:bg-gray-100 hover:text-heading rounded"
+      >
+        Settings
+      </DropdownItem>
+      <DropdownItem
+        href="#"
+        @click.prevent="toggle"
+        class="inline-flex items-center w-full p-2 hover:bg-gray-100 hover:text-heading rounded"
+      >
+        Earnings
+      </DropdownItem>
+      <DropdownItem
+        href="#"
+        @click.prevent="toggle"
+        class="inline-flex items-center w-full p-2 hover:bg-gray-100 hover:text-heading rounded"
+      >
+        Sign Out
+      </DropdownItem>
     </template>
   </Dropdown>
 </template>
