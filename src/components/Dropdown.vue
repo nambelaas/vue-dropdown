@@ -10,33 +10,25 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 import { vOnClickOutside } from '@vueuse/components'
-export default {
-  name: 'Dropdown',
-  directives: {
-    onClickOutside: vOnClickOutside,
-  },
-  computed: {
-    toggleClass() {
-      return this.isOpen
-        ? 'z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
-        : 'hidden z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
-    },
-    iconClass() {
-      return this.isOpen ? 'w-4 h-4 ms-1.5 -me-0.5 rotate-180' : 'w-4 h-4 ms-1.5 -me-0.5'
-    },
-  },
-  data: () => ({
-    isOpen: false,
-  }),
-  methods: {
-    toggle() {
-      this.isOpen = !this.isOpen
-    },
-    dropdownHandler() {
-      this.isOpen = false
-    },
-  },
+
+let isOpen = ref(false)
+
+const toggle = () => {
+  isOpen.value = !isOpen.value
 }
+const dropdownHandler = () => {
+  isOpen.value = false
+}
+
+const toggleClass = computed(() => {
+  return isOpen.value
+    ? 'z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
+    : 'hidden z-10 bg-neutral-primary-medium border border-[0.5px] border-gray-200 rounded-lg shadow-sm w-44 mt-1'
+})
+const iconClass = computed(() => {
+  return isOpen.value ? 'w-4 h-4 ms-1.5 -me-0.5 rotate-180' : 'w-4 h-4 ms-1.5 -me-0.5'
+})
 </script>

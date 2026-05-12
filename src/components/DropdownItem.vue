@@ -1,14 +1,13 @@
 <template>
   <li>
     <a v-bind="$attrs">
-        <slot></slot>
+      <slot></slot>
     </a>
   </li>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DropdownItem',
+<script setup lang="ts">
+defineOptions({
   inheritAttrs: false,
-}
+})
 </script>

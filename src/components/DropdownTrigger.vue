@@ -7,15 +7,12 @@
   </component>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DropdownTrigger',
-  props: {
-    tag: {
-      type: String,
-      default: 'button',
-      validator: (value: string) => ['button', 'a'].includes(value),
-    },
+<script setup lang="ts">
+const props = defineProps({
+  tag: {
+    type: String,
+    default: 'button',
+    validator: (value: string) => ['button', 'a'].includes(value),
   },
-}
+})
 </script>
